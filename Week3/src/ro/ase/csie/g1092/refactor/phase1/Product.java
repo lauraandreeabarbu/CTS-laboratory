@@ -1,26 +1,52 @@
 package ro.ase.csie.g1092.refactor.phase1;
 
+import java.nio.channels.UnsupportedAddressTypeException;
+
 public class Product {
-	public float Calculeaza(int t, float s, int perioada)
+	
+	public static final int MAX_AGE_ACCOUNT = 10;
+	public static final float MAX_FIDELITY_DISCOUNT = 0.15f;
+	
+	
+	public float computePriceWithDiscount(ProductType productType, float price, int accountAge)
 	  {
-	    float rezultat = 0;
-	    float valoare = (perioada > 10) ? (float)15/100 : (float)perioada/100; 
-	    if (t == 1)
+	    float finalPrice = 0;
+	    float fidelityDiscount = (accountAge > MAX_AGE_ACCOUNT) ? MAX_FIDELITY_DISCOUNT : (float)accountAge/100; 
+	    
+	    switch(productType)
 	    {
-	      rezultat = s;
+	    case NEW:
+	    	finalPrice = price;
+	    	break;
+	    case DISCOUNTED:
+	    	finalPrice = (price - (ProductType.DISCOUNTED.getDiscount() * price)) - fidelityDiscount * (price - (ProductType.DISCOUNTED.getDiscount() * price));
+		    break;
+	    case LIMITED_STOCK:
+	    	finalPrice = (price - (ProductType.LIMITED_STOCK.getDiscount() * price)) - fidelityDiscount * (price - (ProductType.LIMITED_STOCK.getDiscount() * price));
+		    break;
+	    case LEGACY:
+	    	finalPrice = (price - (ProductType.LEGACY.getDiscount() * price)) - fidelityDiscount * (price - (ProductType.LEGACY.getDiscount() * price));
+	 	    break;
+	 	default:
+	 		throw new UnsupportedOperationException("The enum type is not created");
 	    }
-	    else if (t == 2)
+	    
+	    if (productType == ProductType.NEW)
 	    {
-	      rezultat = (s - (0.1f * s)) - valoare * (s - (0.1f * s));
+	      finalPrice = price;
 	    }
-	    else if (t == 3)
+	    else if (productType == ProductType.DISCOUNTED)
 	    {
-	      rezultat = (s - (0.25f * s)) - valoare * (s - (0.25f * s));
+	      finalPrice = (price - (ProductType.DISCOUNTED.getDiscount() * price)) - fidelityDiscount * (price - (ProductType.DISCOUNTED.getDiscount() * price));
 	    }
-	    else if (t == 4)
+	    else if (productType == ProductType.LIMITED_STOCK)
 	    {
-	      rezultat = (s - (0.35f * s)) - valoare * (s - (0.35f * s));
+	      finalPrice = (price - (ProductType.LIMITED_STOCK.getDiscount() * price)) - fidelityDiscount * (price - (ProductType.LIMITED_STOCK.getDiscount() * price));
 	    }
-	    return rezultat;
+	    else if (productType == ProductType.LEGACY)
+	    {
+	      finalPrice = (price - (ProductType.LEGACY.getDiscount() * price)) - fidelityDiscount * (price - (ProductType.LEGACY.getDiscount() * price));
+	    }
+	    return finalPrice;
 	  }
 }
