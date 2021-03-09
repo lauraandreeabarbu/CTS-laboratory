@@ -2,14 +2,27 @@ package ro.ase.csie.g1092.refactor.phase1;
 
 import java.nio.channels.UnsupportedAddressTypeException;
 
+import ro.ase.csie.g1092.refactor.exceptions.InvalidAgeException;
+import ro.ase.csie.g1092.refactor.exceptions.InvalidPriceException;
+
 public class Product {
 	
 	public static final int MAX_AGE_ACCOUNT = 10;
 	public static final float MAX_FIDELITY_DISCOUNT = 0.15f;
 	
 	
-	public float computePriceWithDiscount(ProductType productType, float price, int accountAge)
+	public float computePriceWithDiscount(ProductType productType, float price, int accountAge) throws InvalidPriceException, InvalidAgeException
 	  {
+		
+		if (price <=0)
+		{
+			throw new InvalidPriceException();
+		}
+		if (accountAge <0)
+		{
+			throw new InvalidAgeException();
+		}
+		
 	    float finalPrice = 0;
 	    float fidelityDiscount = (accountAge > MAX_AGE_ACCOUNT) ? MAX_FIDELITY_DISCOUNT : (float)accountAge/100; 
 	    
