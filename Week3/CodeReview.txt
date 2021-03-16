@@ -14,3 +14,8 @@ Phase 2 - KISS & Single Responsibility (Keep it simple and stupid)
 - a function should do only one thing
 
 Phase 3 - Single Responsibility & Dependency Inversion (DIP)
+- the static final value may change when the marketing strategy
+-
+-
+
+
