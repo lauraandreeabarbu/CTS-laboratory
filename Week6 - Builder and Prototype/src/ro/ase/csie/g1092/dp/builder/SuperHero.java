@@ -49,7 +49,7 @@ public class SuperHero {
 	}
 	
 	
-	public static class SuperHeroBuilder() {
+	public static class SuperHeroBuilder {
 	
 		private SuperHero superHero = null;
 		

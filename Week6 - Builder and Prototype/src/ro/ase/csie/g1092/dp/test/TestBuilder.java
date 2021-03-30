@@ -2,6 +2,8 @@ package ro.ase.csie.g1092.dp.test;
 
 import ro.ase.csie.g1092.dp.builder.Pistol;
 import ro.ase.csie.g1092.dp.builder.SuperHero;
+import ro.ase.csie.g1092.dp.builder.SuperHero.SuperHeroBuilder;
+import ro.ase.csie.g1092.dp.builder.SuperHeroDirector;
 
 public class TestBuilder {
 
@@ -33,5 +35,7 @@ public class TestBuilder {
 				.addRightWeapon(new Pistol())
 				.build();
 	
+		SuperHeroDirector catalogue = new SuperHeroDirector(new SuperHeroBuilder("Joker", 200));
+		
 	}
 }
