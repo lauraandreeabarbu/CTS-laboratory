@@ -12,6 +12,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import ro.ase.csie.g1092.testing.exceptions.WrongAgeException;
+import ro.ase.csie.g1092.testing.exceptions.WrongGradesException;
 import ro.ase.csie.g1092.testing.exceptions.WrongNameException;
 import ro.ase.csie.g1092.testing.models.Student;
 
@@ -107,9 +108,50 @@ public class TestStudentt {
 		student.setAge(newAge);
 	}
 	
+	@Test
+	public void testGetGradesAverageAscendingOrder() throws WrongGradesException
+	{
+		ArrayList<Integer> sortedGrades = new ArrayList<Integer>();
+		sortedGrades.add(8);
+		sortedGrades.add(9);
+		sortedGrades.add(10);
+		student.setGrades(sortedGrades);
+		
+		float expectedAverage = 9;
+		float computedAverage = student.getGradesAverage();
+		
+		assertEquals("Testing with a sorted set of grades", expectedAverage, computedAverage, 0);
+	}
+	
+	@Test
+	public void testGetGradesAverageCardinalityZero() throws WrongGradesException
+	{
+		ArrayList<Integer> grades = new ArrayList<Integer>();
+		student.setGrades(grades);
+		
+		float expectedAverage = 0;
+		float computedAverage = student.getGradesAverage();
+		
+		assertEquals("Testing with an empty set of grades", expectedAverage, computedAverage, 0);
+		
+		
+	}
 	
 	
-	
+	@Test
+	public void testGetGradesAverageCardinalityOne() throws WrongGradesException
+	{
+		ArrayList<Integer> grades = new ArrayList<Integer>();
+		int theGrade = 10;
+		student.setGrades(grades);
+		
+		float expectedAverage = theGrade;
+		float computedAverage = student.getGradesAverage();
+		
+		assertEquals("Testing with an empty set of grades", expectedAverage, computedAverage, 0);
+		
+		
+	}
 	
 	
 }
