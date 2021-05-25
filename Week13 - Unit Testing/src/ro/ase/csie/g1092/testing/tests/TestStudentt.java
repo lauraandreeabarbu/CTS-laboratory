@@ -95,8 +95,17 @@ public class TestStudentt {
 			assertTrue(true); //the test has passed - opposite of fail();
 		}
 	}
+	//this
 	
+	//is equivalent with
 	
+	//this
+	@Test(expected = WrongAgeException.class)
+	public void testSetAgeErrorConditionGreaterThanMax() throws WrongAgeException
+	{
+		int newAge = student.MAX_AGE + 1000;
+		student.setAge(newAge);
+	}
 	
 	
 	
