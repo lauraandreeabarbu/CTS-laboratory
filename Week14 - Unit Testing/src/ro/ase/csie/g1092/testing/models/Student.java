@@ -46,7 +46,7 @@ public class Student {
 
 
 	public void setAge(int age) throws WrongAgeException {
-		if(age < MIN_AGE)
+		if(age < MIN_AGE || age > MAX_AGE)
 		{
 			throw new WrongAgeException();
 		}
@@ -55,7 +55,7 @@ public class Student {
 
 
 	public void setGrades(ArrayList<Integer> grades) throws WrongGradesException{
-		this.grades = grades;
+		this.grades = (ArrayList<Integer>) grades.clone();
 	}
 	
 	
@@ -70,7 +70,7 @@ public class Student {
 
 	public float getGradesAverage() {
 		
-		if(this.grades.size() == 0)
+		if(this.grades == null || this.grades.size() == 0)
 		{
 			return 0;
 		}
@@ -83,5 +83,17 @@ public class Student {
 		
 	}
 
+	public int getMinGrade()
+	{
+		int min = this.grades.get(0);
+		for(int grade : this.grades)
+		{
+			if(min > grade)
+			{
+				min = grade;
+			}
+		}
+		return min;
+	}
 	
 }

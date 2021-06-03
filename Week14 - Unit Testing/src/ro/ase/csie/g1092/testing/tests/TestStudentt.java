@@ -10,11 +10,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import ro.ase.csie.g1092.testing.exceptions.WrongAgeException;
 import ro.ase.csie.g1092.testing.exceptions.WrongGradesException;
 import ro.ase.csie.g1092.testing.exceptions.WrongNameException;
 import ro.ase.csie.g1092.testing.models.Student;
+import ro.ase.csie.g1092.testing.tests.categories.ImportantTest;
+import ro.ase.csie.g1092.testing.tests.categories.PerformanceTest;
 
 public class TestStudentt {
 
@@ -108,6 +111,7 @@ public class TestStudentt {
 		student.setAge(newAge);
 	}
 	
+	@Category({ImportantTest.class})
 	@Test
 	public void testGetGradesAverageAscendingOrder() throws WrongGradesException
 	{
@@ -123,6 +127,7 @@ public class TestStudentt {
 		assertEquals("Testing with a sorted set of grades", expectedAverage, computedAverage, 0);
 	}
 	
+
 	@Test
 	public void testGetGradesAverageCardinalityZero() throws WrongGradesException
 	{
@@ -137,7 +142,7 @@ public class TestStudentt {
 		
 	}
 	
-	
+	@Category({ImportantTest.class, PerformanceTest.class})
 	@Test
 	public void testGetGradesAverageCardinalityOne() throws WrongGradesException
 	{
